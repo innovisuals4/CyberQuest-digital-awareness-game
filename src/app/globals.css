@@ -1,0 +1,346 @@
+@import "tailwindcss";
+
+/* ============================================================
+   CYBERQUEST — "NEON SIGNAL" DESIGN SYSTEM
+   Primitive → Semantic → Component tokens
+   ============================================================ */
+
+:root {
+  /* primitives */
+  --cq-ink-900: #07030c;
+  --cq-ink-800: #0d0614;
+  --cq-ink-700: #140a1e;
+  --cq-plum-600: #1d0f2a;
+  --cq-pink-500: #ff4d9d;
+  --cq-pink-400: #ff77b6;
+  --cq-flame-500: #ff7a45;
+  --cq-gold-400: #ffc857;
+  --cq-mint-400: #54f0b8;
+  --cq-red-400: #ff4d6d;
+  --cq-paper: #f6eef9;
+  --cq-ash: #a694b4;
+
+  /* semantic */
+  --bg: var(--cq-ink-900);
+  --bg-soft: var(--cq-ink-800);
+  --surface: rgba(255, 255, 255, 0.028);
+  --surface-strong: rgba(255, 255, 255, 0.055);
+  --line: rgba(255, 255, 255, 0.085);
+  --line-strong: rgba(255, 255, 255, 0.18);
+  --line-hot: rgba(255, 77, 157, 0.5);
+  --fg: var(--cq-paper);
+  --muted: var(--cq-ash);
+  --primary: var(--cq-pink-500);
+  --primary-soft: rgba(255, 77, 157, 0.12);
+  --accent: var(--cq-flame-500);
+  --ok: var(--cq-mint-400);
+  --bad: var(--cq-red-400);
+  --warn: var(--cq-gold-400);
+
+  /* component */
+  --radius: 18px;
+  --radius-sm: 10px;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-soft: var(--bg-soft);
+  --color-surface: var(--surface);
+  --color-surface-strong: var(--surface-strong);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-line-hot: var(--line-hot);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-primary: var(--primary);
+  --color-primary-soft: var(--primary-soft);
+  --color-accent: var(--accent);
+  --color-ok: var(--ok);
+  --color-bad: var(--bad);
+  --color-warn: var(--warn);
+  --font-sans: var(--font-space-grotesk);
+  --font-mono: var(--font-jetbrains-mono);
+  --font-display: var(--font-orbitron);
+}
+
+/* ---------- base ---------- */
+
+@layer base {
+  html,
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-space-grotesk), system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    background-image:
+      radial-gradient(900px 600px at 12% -8%, rgba(255, 77, 157, 0.14), transparent 60%),
+      radial-gradient(800px 520px at 92% 8%, rgba(255, 122, 69, 0.1), transparent 62%),
+      radial-gradient(700px 700px at 50% 110%, rgba(120, 60, 200, 0.14), transparent 65%);
+    background-attachment: fixed;
+  }
+
+  ::selection {
+    background: var(--primary);
+    color: #12030b;
+  }
+
+  *:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 9px;
+    height: 9px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 77, 157, 0.28);
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 77, 157, 0.5);
+  }
+}
+
+/* ---------- components ---------- */
+
+@layer components {
+  /* texture */
+  .cq-grid {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+    background-size: 72px 72px;
+    mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, black, transparent 78%);
+    -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, black, transparent 78%);
+  }
+
+  .cq-noise {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+    opacity: 0.035;
+  }
+
+  /* surfaces */
+  .cq-panel {
+    position: relative;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.012));
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    backdrop-filter: blur(14px);
+  }
+
+  .cq-panel-flat {
+    background: rgba(255, 255, 255, 0.022);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+  }
+
+  .cq-hairline {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 77, 157, 0.45), transparent);
+  }
+
+  /* clipped corner — signature shape */
+  .cq-cut {
+    clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+  }
+
+  .cq-glow {
+    box-shadow:
+      0 0 0 1px rgba(255, 77, 157, 0.35),
+      0 14px 40px -14px rgba(255, 77, 157, 0.55);
+  }
+
+  .cq-glow-soft {
+    box-shadow: 0 24px 70px -30px rgba(255, 77, 157, 0.55);
+  }
+
+  .neon-text {
+    text-shadow:
+      0 0 18px rgba(255, 77, 157, 0.45),
+      0 0 50px rgba(255, 122, 69, 0.25);
+  }
+
+  .text-glow {
+    text-shadow: 0 0 12px rgba(255, 77, 157, 0.55);
+  }
+
+  /* controls */
+  .cq-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    border-radius: 999px;
+    font-family: var(--font-orbitron), sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 0.95rem 1.6rem;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease, color 0.18s ease;
+    cursor: pointer;
+  }
+  .cq-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+  .cq-btn-primary {
+    background: linear-gradient(100deg, var(--primary), var(--accent));
+    color: #14020a;
+    box-shadow: 0 16px 36px -18px rgba(255, 77, 157, 0.9);
+  }
+  .cq-btn-primary:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 22px 46px -18px rgba(255, 77, 157, 0.95);
+  }
+  .cq-btn-ghost {
+    border: 1px solid var(--line-strong);
+    color: var(--fg);
+    background: rgba(255, 255, 255, 0.02);
+  }
+  .cq-btn-ghost:hover:not(:disabled) {
+    border-color: var(--line-hot);
+    background: rgba(255, 77, 157, 0.09);
+    color: #fff;
+  }
+
+  .cq-kbd {
+    font-family: var(--font-jetbrains-mono), monospace;
+    font-size: 9px;
+    line-height: 1;
+    padding: 3px 5px;
+    border-radius: 4px;
+    border: 1px solid var(--line-strong);
+    color: var(--muted);
+  }
+
+  /* meters */
+  .cq-meter {
+    height: 6px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.07);
+    overflow: hidden;
+  }
+  .cq-meter > span {
+    display: block;
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+  }
+
+  .cq-seg {
+    height: 26px;
+    flex: 1;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.06);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+  }
+  .cq-seg-done {
+    background: linear-gradient(180deg, var(--primary), #d92f7f);
+    box-shadow: 0 0 14px rgba(255, 77, 157, 0.45);
+  }
+  .cq-seg-bad {
+    background: linear-gradient(180deg, var(--bad), #b31f3a);
+  }
+  .cq-seg-live {
+    background: rgba(255, 122, 69, 0.35);
+    animation: seg-pulse 1.6s ease-in-out infinite;
+  }
+
+  .cq-scan {
+    position: absolute;
+    inset-inline: 0;
+    height: 18%;
+    background: linear-gradient(to bottom, transparent, rgba(255, 77, 157, 0.09), transparent);
+    animation: scan 6s linear infinite;
+    pointer-events: none;
+  }
+
+  .float {
+    animation: float 5s ease-in-out infinite;
+  }
+
+  .blink {
+    animation: blink 1.1s step-end infinite;
+  }
+
+  .cq-ticker-track {
+    display: flex;
+    width: max-content;
+    animation: ticker 42s linear infinite;
+  }
+  .cq-ticker:hover .cq-ticker-track {
+    animation-play-state: paused;
+  }
+}
+
+/* ---------- motion ---------- */
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes seg-pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes scan {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(1000%);
+  }
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.15;
+  }
+}
+
+@keyframes ticker {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .float,
+  .blink,
+  .cq-scan,
+  .cq-ticker-track,
+  .cq-seg-live {
+    animation: none !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
